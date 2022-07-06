@@ -17,7 +17,7 @@ const NavItem = ({ text, icon, path }: NavItemProps) => {
     <li>
       <Link href={path}>
         <a
-          className={`py-4 relative px-6 gap-x-4 items-center grid grid-cols-[24px_minmax(0,1fr)] transition-colors  text-base ${
+          className={`py-4 relative px-6 gap-x-4 items-center grid grid-cols-[24px_minmax(0,1fr)] transition-colors text-sm  ${
             isActive
               ? "text-brand-blue bg-brand-blue/10"
               : "text-brand-blue-dark bg-transparent"
