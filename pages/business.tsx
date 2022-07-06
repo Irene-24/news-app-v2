@@ -5,13 +5,13 @@ import { increment } from "redux/counterSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { SEO } from "../components";
 
-const Home: NextPage = () => {
+const Business: NextPage = () => {
   const dispatch = useAppDispatch();
   const { value } = useAppSelector((state) => state.counter);
 
   return (
     <p>
-      <SEO />
+      <SEO title="Business" />
       Home Page
       <br />
       Counter value = {value}
@@ -25,4 +25,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Business;
