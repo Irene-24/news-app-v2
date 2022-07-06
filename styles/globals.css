@@ -14,16 +14,16 @@
 
    ::-webkit-scrollbar 
     {
-    width: 12px;
+        width: 12px;
     }
 
     ::-webkit-scrollbar-track 
     {
-        @apply bg-blue-400
+        @apply bg-slate-400;
     }
 
     ::-webkit-scrollbar-thumb 
     {
-        @apply rounded bg-slate-50;
+        @apply  bg-brand-blue;
     }
 }
