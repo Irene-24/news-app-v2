@@ -2,11 +2,30 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="px-4 py-6 footer">
-      <div className="footer-content">
+    <footer className="py-6 footer">
+      <div className="space-y-2">
         <p className="text-sm text-center text-gray-600">
-          © Brandname 2020. All rights reserved.{" "}
-          <a href="https://twitter.com/iaminos">by iAmine</a>
+          Design credit goes to &nbsp;
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.figma.com/@subas"
+            className="text-brand-blue-medium font-medium"
+          >
+            Subash Matheswaran
+          </a>
+        </p>
+
+        <p className="text-sm text-center text-gray-600">
+          Built by &nbsp;
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/Irene-24"
+            className="text-brand-orange font-medium"
+          >
+            Irene_24
+          </a>
         </p>
       </div>
     </footer>

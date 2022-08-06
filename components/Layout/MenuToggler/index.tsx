@@ -9,7 +9,7 @@ interface Props {
 }
 
 const MenuToggler = ({
-  stroke = "#072D4B",
+  stroke = "#fff",
   active = false,
   onClick,
   className,
@@ -18,15 +18,17 @@ const MenuToggler = ({
     <button
       onClick={onClick}
       type="button"
-      className={`${active ? styles.active : ""}   ${className}`}
+      className={`${
+        active ? styles.active : ""
+      } bg-brand-blue rounded-full drop-shadow-2xl  ${className}`}
     >
-      <span className="absolute sr-only">menu-toggle</span>
+      <span className="absolute opacity-0">menu-toggle</span>
 
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 200 200"
-        width="60"
-        height="60"
+        width="50"
+        height="50"
         className={styles.svg}
       >
         <g stroke={stroke} strokeLinecap="round" strokeWidth="6.5">

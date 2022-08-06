@@ -19,7 +19,7 @@ const NavBar = () => {
 
   return (
     <>
-      <header className="fixed left-0 w-full top-0 px-2 py-1.5 md:px-4 bg-transparent grid md:grid-cols-[250px_minmax(0,1fr)] ">
+      <header className="fixed left-0 w-full top-0 px-2 py-1.5 md:px-4 bg-transparent grid md:grid-cols-[250px_minmax(0,1fr)] bg-brand-blue-light shadow-sm  ">
         <div className="" />
         <div className="grid grid-cols-[40px_minmax(0,1fr)_70px] items-center gap-2 md:grid-cols-[minmax(0,1fr)_70px] md:gap-x-[4%] lg:gap-x-[10%]">
           <Link href="/">

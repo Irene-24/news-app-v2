@@ -2,13 +2,13 @@ import React, { useEffect, useState, useCallback, Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
 import { Transition } from "@headlessui/react";
 
 import NavItem from "./NavItem";
 import { MenuToggler } from "./MenuToggler";
 
 import { paths } from "./paths";
+import { useResize } from "hooks/useResize";
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,13 +16,10 @@ const SideBar = () => {
 
   const close = useCallback(() => setIsOpen(false), []);
 
-  useEffect(() => {
-    window?.addEventListener("resize", close);
-
-    return () => window?.removeEventListener("resize", close);
-  }, [close]);
+  useResize(close);
 
   useEffect(() => {
+    //close sidebar when a link is clicked
     close();
   }, [router?.asPath, close]);
 

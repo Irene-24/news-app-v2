@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import BodyGrid from "./BodyGrid";
 import Footer from "./Footer";
 import NavBar from "./HeaderNav";
 import SideBar from "./SideBar";
@@ -13,7 +14,7 @@ const Layout = ({ children }: LayoutProps) => {
       <SideBar />
       <main className="px-4 py-20">
         <NavBar />
-        {children}
+        <BodyGrid>{children}</BodyGrid>
         <Footer />
       </main>
     </div>

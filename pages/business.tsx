@@ -12,7 +12,7 @@ const Business: NextPage = () => {
   return (
     <p>
       <SEO title="Business" />
-      Home Page
+      Business Page
       <br />
       Counter value = {value}
       <br />

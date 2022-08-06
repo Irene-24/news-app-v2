@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         brand: {
+          orange: "#fea135",
           blue: {
             DEFAULT: "#2F9FF8",
             dark: "#072D4B",
@@ -19,6 +20,17 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Roboto", ...defaultTheme.fontFamily.sans],
+      },
+      screens: {
+        "phone-mini": "200px",
+        "phone-xs": "320px",
+        "phone-sm": "375px",
+        "phone-md": "400px",
+        "phone-lg": "480px",
+        ...defaultTheme.screens,
+        "desktop-med": "1350px",
+        "desktop-wide": "1440px",
+        max: "1920px",
       },
     },
   },

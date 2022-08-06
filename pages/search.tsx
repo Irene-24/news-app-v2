@@ -12,7 +12,7 @@ const Search: NextPage = () => {
   return (
     <p>
       <SEO title={`Search`} />
-      Home Page
+      Search Page
       <br />
       Counter value = {value}
       <br />
