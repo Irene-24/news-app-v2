@@ -50,6 +50,7 @@ const SideBar = () => {
                   alt="News app logo"
                   layout="fill"
                   objectPosition="center"
+                  loading="eager"
                 />
               </a>
             </Link>

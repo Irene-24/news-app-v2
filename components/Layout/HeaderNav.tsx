@@ -30,6 +30,7 @@ const NavBar = () => {
                 objectFit="contain"
                 objectPosition="center"
                 layout="fill"
+                loading="eager"
               />
             </a>
           </Link>
