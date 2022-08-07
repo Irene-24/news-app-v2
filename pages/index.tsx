@@ -3,14 +3,14 @@ import Link from "next/link";
 
 import { increment } from "redux/counterSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { SEO } from "../components";
+import { DisplayErrorMessage, DisplayErrorWithChildren, SEO } from "components";
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch();
   const { value } = useAppSelector((state) => state.counter);
 
   return (
-    <p>
+    <div>
       <SEO />
       Home Page
       <br />
@@ -21,7 +21,17 @@ const Home: NextPage = () => {
       <Link href="/counter">
         <a>Counter</a>
       </Link>
-    </p>
+      <DisplayErrorMessage
+        onDismiss={() => console.log("dismiss")}
+        retry={() => console.log("retry")}
+      />
+      <DisplayErrorWithChildren
+        onDismiss={() => console.log("dismiss")}
+        retry={() => console.log("retry")}
+      >
+        <p>Testing</p>
+      </DisplayErrorWithChildren>
+    </div>
   );
 };
 

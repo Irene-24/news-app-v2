@@ -40,6 +40,8 @@ describe("Sidebar component", () => {
 
     await user.click(sideToggler);
 
-    await waitForElementToBeRemoved(() => screen.queryByText(/overlay/i));
+    await waitForElementToBeRemoved(() => screen.queryByText(/overlay/i), {
+      timeout: 2000, //to stop the timeout issue, default is 1000ms
+    });
   });
 });

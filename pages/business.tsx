@@ -10,7 +10,7 @@ const Business: NextPage = () => {
   const { value } = useAppSelector((state) => state.counter);
 
   return (
-    <p>
+    <div>
       <SEO title="Business" />
       Business Page
       <br />
@@ -21,7 +21,7 @@ const Business: NextPage = () => {
       <Link href="/counter">
         <a>Counter</a>
       </Link>
-    </p>
+    </div>
   );
 };
 

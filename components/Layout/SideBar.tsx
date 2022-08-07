@@ -8,7 +8,7 @@ import NavItem from "./NavItem";
 import { MenuToggler } from "./MenuToggler";
 
 import { paths } from "./paths";
-import { useResize } from "hooks/useResize";
+import { useWindowEvent } from "hooks";
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +16,7 @@ const SideBar = () => {
 
   const close = useCallback(() => setIsOpen(false), []);
 
-  useResize(close);
+  useWindowEvent("resize", close);
 
   useEffect(() => {
     //close sidebar when a link is clicked

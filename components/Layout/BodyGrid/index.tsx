@@ -9,7 +9,7 @@ import { NextRouter, useRouter } from "next/router";
 import Link from "next/link";
 
 import { scrollTo } from "utils";
-import { useOnPageScroll } from "hooks/useOnPageScroll";
+import { useWindowEvent } from "hooks";
 
 interface BodyGridProps {
   children: ReactNode;
@@ -25,9 +25,7 @@ const JumpTo = () => {
   const [atTop, setAtTop] = useState(true);
 
   const toggle = useCallback(() => {
-    if (window) {
-      window.scrollY >= 100 ? setAtTop(false) : setAtTop(true);
-    }
+    setAtTop(window?.scrollY <= 100);
   }, []);
 
   const scroll = () => {
@@ -43,11 +41,12 @@ const JumpTo = () => {
     }
   };
 
-  useOnPageScroll(toggle);
+  useWindowEvent("scroll", toggle);
 
   return (
     <button onClick={scroll} className="text-brand-blue-dark font-medium">
-      Jump to {atTop ? "bottom" : <>top&nbsp;&nbsp;&nbsp;</>}
+      Jump to{" "}
+      {atTop ? "bottom" : <>top&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</>}
     </button>
   );
 };
@@ -104,7 +103,6 @@ const BodyGrid = ({ children }: BodyGridProps) => {
       </aside>
       <main>
         {children}
-
         <div>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
