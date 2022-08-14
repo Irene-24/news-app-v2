@@ -14,6 +14,11 @@ interface SearchNewsRequest {
   query: string;
 }
 
+const defaultConfig = {
+  apikey: apiKey,
+  language: "en",
+};
+
 export const newsApi = createApi({
   reducerPath: "newsApi",
   baseQuery: fetchBaseQuery({
@@ -34,8 +39,7 @@ export const newsApi = createApi({
           params: {
             page: arg.page ?? 0,
             category: arg.category,
-            apikey: apiKey,
-            language: "en",
+            ...defaultConfig,
           },
         };
       },
@@ -48,8 +52,7 @@ export const newsApi = createApi({
           params: {
             page: arg.page ?? 0,
             q: arg.query,
-            apikey: apiKey,
-            language: "en",
+            ...defaultConfig,
           },
         };
       },
