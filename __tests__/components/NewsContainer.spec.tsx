@@ -28,14 +28,37 @@ const loadedNotLast = {
 };
 
 const loadingNotLast = {
-  ...emptyConfig,
+  ...loadedNotLast,
   loading: true,
+};
+
+const all = {
+  loading: false,
+  error: null,
+  isLast: true,
+  loadArticles,
+  articles: data.results as Article[],
+};
+
+const errEmpty = {
+  loading: false,
+  error: "Error",
+  isLast: true,
+  loadArticles,
+  articles: [],
+};
+
+const errExistingData = {
+  loading: false,
+  error: "Error",
   isLast: false,
-  articles: data.results.slice(0, 5) as Article[],
+  loadArticles,
+  retryLoadingArticles: loadArticles,
+  articles: data.results.slice(0, 3) as Article[],
 };
 
 describe("NewsContainer component", () => {
-  test("render only `No data` when no artcles", () => {
+  test("render only `No data` when no articles", () => {
     render(<NewsContainer {...emptyConfig} />);
 
     const empty = screen.getByText(/no data/i);
@@ -106,6 +129,23 @@ describe("NewsContainer component", () => {
     expect(articles).toHaveLength(loadedNotLast.articles.length);
   });
 
+  test("render all articles, no other thing", () => {
+    render(<NewsContainer {...all} />);
+
+    const empty = screen.queryByText(/no data/i);
+    const loaders = screen.queryAllByText(/loading/i);
+    const showMore = screen.queryByRole("button", {
+      name: /show more/i,
+    });
+
+    const articles = screen.getAllByRole("img");
+    expect(empty).toBeNull();
+
+    expect(loaders).toHaveLength(0);
+    expect(showMore).not.toBeInTheDocument();
+    expect(articles).toHaveLength(data.results.length);
+  });
+
   test("Test that load more fires an event on click", async () => {
     render(<NewsContainer {...loadedNotLast} />);
 
@@ -117,5 +157,47 @@ describe("NewsContainer component", () => {
 
     await user.click(showMore);
     expect(loadArticles).toHaveBeenCalled();
+  });
+
+  test("render error component when no data", () => {
+    render(<NewsContainer {...errEmpty} />);
+
+    const empty = screen.queryByText(/no data/i);
+    const loaders = screen.queryAllByText(/loading/i);
+    const showMore = screen.queryByRole("button", {
+      name: /show more/i,
+    });
+
+    const err = screen.getByText(/error message/i);
+
+    const articles = screen.queryAllByRole("img");
+
+    expect(empty).toBeNull();
+    expect(loaders).toHaveLength(0);
+    expect(showMore).not.toBeInTheDocument();
+    expect(articles).toHaveLength(0);
+
+    expect(err).toBeInTheDocument();
+  });
+
+  test("render error component, when  data", () => {
+    render(<NewsContainer {...errExistingData} />);
+
+    const empty = screen.queryByText(/no data/i);
+    const loaders = screen.queryAllByText(/loading/i);
+    const showMore = screen.queryByRole("button", {
+      name: /show more/i,
+    });
+
+    const err = screen.getByText(/error message/i);
+
+    const articles = screen.getAllByRole("img");
+
+    expect(empty).toBeNull();
+    expect(loaders).toHaveLength(0);
+    expect(showMore).not.toBeInTheDocument();
+    expect(articles).toHaveLength(errExistingData.articles.length);
+
+    expect(err).toBeInTheDocument();
   });
 });

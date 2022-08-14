@@ -46,7 +46,7 @@ const Home: NextPage = () => {
       <Link href="/counter">
         <a>Counter</a>
       </Link>
-      <Fade isShowing={show}>
+      {/* <Fade isShowing={show}>
         <DisplayErrorMessage
           onDismiss={() => setShow(false)}
           retry={() => console.log("retry")}
@@ -57,12 +57,13 @@ const Home: NextPage = () => {
         retry={() => console.log("retry")}
       >
         <p>Testing</p>
-      </DisplayErrorWithChildren>
+      </DisplayErrorWithChildren> */}
       <NewsContainer
         isLast={articles.length >= articlesData.length}
         articles={articles}
         loadArticles={loadMore}
         loading={loading}
+        error="test"
       />
     </div>
   );

@@ -14,6 +14,12 @@ interface NewsContainerProps {
   retryLoadingArticles?: Function;
 }
 
+const isEmpty = (value: any) => {
+  if (!value) return true;
+
+  return Object.keys(value).length === 0;
+};
+
 const NewsContainer = ({
   articles = [],
   loadArticles,
@@ -34,15 +40,19 @@ const NewsContainer = ({
         <Grid articles={articles} />
       ) : (
         <>
-          {!loading ? (
-            <h1 className="px-2 my-2 text-base font-semibold text-center md:text-xl">
-              No data
-            </h1>
-          ) : null}
+          {error ? null : (
+            <>
+              {!loading ? (
+                <h1 className="px-2 my-2 text-base font-semibold text-center md:text-xl">
+                  No data
+                </h1>
+              ) : null}
+            </>
+          )}
         </>
       )}
 
-      {!isLast && articles.length && !loading ? (
+      {!isLast && isEmpty(error) && articles.length && !loading ? (
         <div className="flex items-center justify-center my-20 ">
           <button
             className="px-5 py-2.5 text-brand-blue-dark rounded border border-brand-blue-dark"
@@ -56,11 +66,11 @@ const NewsContainer = ({
       {error && !loading ? (
         <Fade isShowing={!!error}>
           <DisplayErrorWithChildren retry={retryLoadingArticles}>
-            <p>
+            <div className="relative">
               <pre>
                 <code>{JSON.stringify(error, undefined, 2)}</code>
               </pre>
-            </p>
+            </div>
           </DisplayErrorWithChildren>
         </Fade>
       ) : null}
