@@ -1,8 +1,7 @@
 import {
   screen,
   render,
-  //waitForElementToBeRemoved,
-  waitFor,
+  waitForElementToBeRemoved,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -41,15 +40,9 @@ describe("Sidebar component", () => {
 
     await user.click(sideToggler);
 
-    // This keeps retrying until element disappears
-    await waitFor(() => {
-      expect(screen.queryByText(/overlay/i)).not.toBeInTheDocument();
+    //still fails sometimes, try stopping test server and running only this file
+    await waitForElementToBeRemoved(() => screen.queryByText(/overlay/i), {
+      timeout: 4000, //to help with the timeout issue
     });
-
-    // This tries only once and could still fail with extended timeout
-    //consider using this for hide/show elements without animations/transiions
-    // await waitForElementToBeRemoved(() => screen.queryByText(/overlay/i), {
-    //   timeout: 3000, //to stop the timeout issue
-    // });
   });
 });

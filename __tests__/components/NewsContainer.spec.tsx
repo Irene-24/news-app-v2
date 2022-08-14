@@ -106,18 +106,14 @@ describe("NewsContainer component", () => {
     expect(articles).toHaveLength(loadedNotLast.articles.length);
   });
 
-  test("render only subset, then on click render all", async () => {
+  test("Test that load more fires an event on click", async () => {
     render(<NewsContainer {...loadedNotLast} />);
 
     const user = userEvent.setup();
 
-    const articles = screen.getAllByRole("img");
-
     const showMore = screen.getByRole("button", {
       name: /show more/i,
     });
-
-    expect(articles.length).toBeLessThan(data.results.length);
 
     await user.click(showMore);
     expect(loadArticles).toHaveBeenCalled();
