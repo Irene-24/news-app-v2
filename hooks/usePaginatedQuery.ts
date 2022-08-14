@@ -64,9 +64,9 @@ function usePaginatedQuery<
 
   useEffect(() => {
     setLoading(
-      lastResult.isLoading || nextResult.isLoading || currentResult.isLoading
+      lastResult.isFetching || nextResult.isFetching || currentResult.isFetching
     );
-  }, [lastResult.isLoading, nextResult.isLoading, currentResult.isLoading]);
+  }, [lastResult.isFetching, nextResult.isFetching, currentResult.isFetching]);
 
   useEffect(() => {
     setError(

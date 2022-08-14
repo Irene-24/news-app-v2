@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { HYDRATE } from "next-redux-wrapper";
 
 import { NewsResponse } from "utils/types";
 import { Category, Tags, apiKey } from "utils/constants";
@@ -18,6 +19,11 @@ export const newsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `https://newsdata.io/api/1/news`,
   }),
+  extractRehydrationInfo(action, { reducerPath }) {
+    if (action.type === HYDRATE) {
+      return action.payload[reducerPath];
+    }
+  },
   tagTypes: [Tags.Article],
   endpoints: (builder) => ({
     getNews: builder.query<NewsResponse, NewsRequest>({
