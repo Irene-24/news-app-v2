@@ -9,14 +9,12 @@ interface NewsContainerProps {
   articles: Article[];
   loadArticles: Function;
   loading?: boolean;
-  error?: any;
+  error?: string | Record<string, any> | null | undefined;
   isLast: boolean;
   retryLoadingArticles?: Function;
 }
 
 const isEmpty = (value: any) => {
-  if (!value) return true;
-
   return Object.keys(value).length === 0;
 };
 
