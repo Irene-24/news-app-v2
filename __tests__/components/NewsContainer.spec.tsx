@@ -6,7 +6,7 @@ import { NewsContainer } from "../../components/News";
 
 import data from "../../utils/dummyData/news.json";
 
-const loadArticles = () => {};
+const loadArticles = jest.fn();
 
 const emptyConfig = {
   articles: [],
@@ -106,5 +106,20 @@ describe("NewsContainer component", () => {
     expect(articles).toHaveLength(loadedNotLast.articles.length);
   });
 
-  test("render only one loader and existing articles", () => {});
+  test("render only subset, then on click render all", async () => {
+    render(<NewsContainer {...loadedNotLast} />);
+
+    const user = userEvent.setup();
+
+    const articles = screen.getAllByRole("img");
+
+    const showMore = screen.getByRole("button", {
+      name: /show more/i,
+    });
+
+    expect(articles.length).toBeLessThan(data.results.length);
+
+    await user.click(showMore);
+    expect(loadArticles).toHaveBeenCalled();
+  });
 });
