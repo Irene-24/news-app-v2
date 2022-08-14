@@ -41,6 +41,7 @@ describe("Sidebar component", () => {
     await user.click(sideToggler);
 
     //still fails sometimes, try stopping test server and running only this file
+    //commiting too can help make sure other tests don't run
     await waitForElementToBeRemoved(() => screen.queryByText(/overlay/i), {
       timeout: 4000, //to help with the timeout issue
     });
