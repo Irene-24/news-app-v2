@@ -17,7 +17,8 @@ interface SearchNewsRequest {
 export const newsApi = createApi({
   reducerPath: "newsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://newsdata.io/api/1/news`,
+    baseUrl: `https://newsdata.io/api/1`,
+    //trailing slash issue was breaking endpoint
   }),
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
@@ -29,7 +30,7 @@ export const newsApi = createApi({
     getNews: builder.query<NewsResponse, NewsRequest>({
       query: (arg) => {
         return {
-          url: "",
+          url: "/news",
           params: {
             page: arg.page ?? 0,
             category: arg.category,
@@ -43,7 +44,7 @@ export const newsApi = createApi({
     search: builder.query<NewsResponse, SearchNewsRequest>({
       query: (arg) => {
         return {
-          url: "",
+          url: "/news",
           params: {
             page: arg.page ?? 0,
             q: arg.query,

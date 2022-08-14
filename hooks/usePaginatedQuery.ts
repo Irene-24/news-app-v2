@@ -48,7 +48,7 @@ function usePaginatedQuery<
 
   const nextResult = endpoint.useQuery({ ...options, page: currentPage + 1 });
 
-  const refetchOnErr = useCallback(() => {
+  const refetchOnErr = () => {
     if (lastResult.error) {
       lastResult.refetch();
     }
@@ -60,7 +60,7 @@ function usePaginatedQuery<
     if (nextResult.error) {
       nextResult.refetch();
     }
-  }, [lastResult, nextResult, currentResult]);
+  };
 
   useEffect(() => {
     setLoading(
@@ -76,24 +76,35 @@ function usePaginatedQuery<
 
   const newResult = useMemo(() => {
     const values = new Map();
-    const allResults = [lastResult.data, currentResult.data, nextResult.data];
 
+    const allResults = [
+      lastResult?.data,
+      currentResult?.data,
+      nextResult?.data,
+    ];
+
+    /*
+     Makes the assumptions that the array of items   
+     is locatated in the "results" field
+     
+     Consider passing an accessor function for more flexibilty
+     */
     allResults.forEach((res, index) => {
-      if (res.data.results.length) {
+      if (res?.data?.results.length) {
         values.set(getPageKey(currentPage, index), res.data.results);
       }
     });
 
     return values;
-  }, [currentPage, lastResult.data, currentResult.data, nextResult.data]);
+  }, [currentPage, lastResult?.data, currentResult?.data, nextResult?.data]);
 
   useEffect(() => {
     setResults((results) => {
       const result = new Map(results);
-      const newKeys = newResult.keys();
 
-      // @ts-ignore
-      [...newKeys].forEach((k) => result.set(k, newResult.get(k)));
+      Array.from(newResult.keys()).forEach((k) =>
+        result.set(k, newResult.get(k))
+      );
       return result;
     });
   }, [newResult]);
@@ -106,9 +117,7 @@ function usePaginatedQuery<
     prev,
     error,
     refetchOnErr,
-
-    // @ts-ignore
-    results: [].concat.apply([], [...results.values()]),
+    results: [].concat.apply([], Array.from(results.values())),
     isLast: results.size === currentResult?.data?.totalResults,
   };
 }

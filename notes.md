@@ -7,9 +7,6 @@ Possible plans to test the usePagination hook
 - Have a bunch of buttons to trigger the api/hook methods eg faking error, trying out reloading, back, next etc
 - for each method, test for some data/text in the component
 
--Or consider using renderHook
-
-_______________
 
 - eg to test for loaded data,
 currentPage should = 1,
@@ -20,6 +17,13 @@ data should have length, error may or may not be null - [maybe extract to anothe
 - loading false
   
 - text next/back by making sure curpent page is > or < prev value
+
+
+___________________
+
+Or  consider using renderHook
+
+_______________
 
 
 
