@@ -7,7 +7,13 @@ interface Props {
 }
 
 const Grid = ({ articles = [] }: Props) => {
-  return <div>Grid</div>;
+  return (
+    <section className="grid grid-cols-1 gap-3 my-2 sm:grid-cols-2 2xl:grid-cols-3 ">
+      {articles.map((art, i) => (
+        <ArticleCard key={i} />
+      ))}
+    </section>
+  );
 };
 
 export { Grid };

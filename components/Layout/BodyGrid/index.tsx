@@ -21,8 +21,15 @@ const getPath = (router: NextRouter, section: string) => {
     : `${router?.pathname}?section=${section}`;
 };
 
+const getPathNoSection = (router: NextRouter) => {
+  return router?.pathname.includes("search")
+    ? `${router?.pathname}?q=${router.query.q}`
+    : `${router?.pathname}`;
+};
+
 const JumpTo = () => {
   const [atTop, setAtTop] = useState(true);
+  const router = useRouter();
 
   const toggle = useCallback(() => {
     setAtTop(window?.scrollY <= 100);
@@ -38,13 +45,15 @@ const JumpTo = () => {
         top: atTop ? maxAvailableScroll : 0,
         behavior: "smooth",
       });
+
+      router.push(getPathNoSection(router), undefined, { shallow: true });
     }
   };
 
   useWindowEvent("scroll", toggle);
 
   return (
-    <button onClick={scroll} className="text-brand-blue-dark font-medium">
+    <button onClick={scroll} className="font-medium text-brand-blue-dark">
       Jump to{" "}
       {atTop ? "bottom" : <>top&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</>}
     </button>
@@ -86,7 +95,7 @@ const BodyGrid = ({ children }: BodyGridProps) => {
   return (
     <section className="grid lg:grid-cols-[minmax(0,1fr)_30%] gap-4 py-4">
       <aside
-        className="fixed lg:hidden left-2 bottom-2 z-10 grid 
+        className="fixed md:z-[200] lg:hidden left-2 bottom-2 z-10 grid md:right-2 md:left-auto
         grid-cols-1
       phone-xs:grid-cols-[minmax(0,max-content)_minmax(0,max-content)_minmax(0,1fr)] font-medium
       gap-2 items-center rounded-md p-2  text-sm bg-white shadow "
@@ -101,151 +110,9 @@ const BodyGrid = ({ children }: BodyGridProps) => {
 
         <JumpTo />
       </aside>
-      <main>
-        {children}
-        <div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>{" "}
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-            nesciunt provident molestias nam facilis harum, deleniti, reiciendis
-            dignissimos quam adipisci odit dolores ea labore nulla illum, non
-            ipsum quod aspernatur!
-          </p>
-        </div>
-      </main>
+      <main>{children}</main>
       <aside>
-        <div className="lg:fixed w-full top-24 ">
+        <div className="w-full lg:fixed top-24 ">
           <div>
             <div ref={jokesRef}>jokes</div>
             <div ref={converterRef}>converter</div>
