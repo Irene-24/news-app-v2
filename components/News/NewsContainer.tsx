@@ -1,5 +1,7 @@
 import React, { MouseEventHandler } from "react";
 import { Article } from "utils/types";
+import { DisplayErrorWithChildren } from "../DisplayError";
+import Fade from "../Fade";
 import { Bars, Cube } from "../Loaders";
 import { Grid } from "./Grid";
 
@@ -9,11 +11,13 @@ interface NewsContainerProps {
   loading?: boolean;
   error?: any;
   isLast: boolean;
+  retryLoadingArticles?: Function;
 }
 
 const NewsContainer = ({
   articles = [],
   loadArticles,
+  retryLoadingArticles,
   loading = true,
   error = null,
   isLast = true,
@@ -29,9 +33,13 @@ const NewsContainer = ({
       {articles.length ? (
         <Grid articles={articles} />
       ) : (
-        <h1 className="px-2 my-2 text-base font-semibold text-center md:text-xl">
-          No data
-        </h1>
+        <>
+          {!loading ? (
+            <h1 className="px-2 my-2 text-base font-semibold text-center md:text-xl">
+              No data
+            </h1>
+          ) : null}
+        </>
       )}
 
       {!isLast && articles.length && !loading ? (
@@ -43,6 +51,18 @@ const NewsContainer = ({
             Show more
           </button>
         </div>
+      ) : null}
+
+      {error && !loading ? (
+        <Fade isShowing={!!error}>
+          <DisplayErrorWithChildren retry={retryLoadingArticles}>
+            <p>
+              <pre>
+                <code>{JSON.stringify(error, undefined, 2)}</code>
+              </pre>
+            </p>
+          </DisplayErrorWithChildren>
+        </Fade>
       ) : null}
 
       {loading && articles.length ? <Bars /> : null}

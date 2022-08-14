@@ -19,11 +19,11 @@ const NavBar = () => {
 
   return (
     <>
-      <header className="fixed left-0 w-full top-0 px-2 py-1.5 md:px-4 bg-transparent grid md:grid-cols-[250px_minmax(0,1fr)] bg-brand-blue-light shadow-sm  ">
+      <header className="fixed left-0 w-full top-0 px-2 py-1.5 md:px-4 bg-transparent grid md:grid-cols-[250px_minmax(0,1fr)] bg-brand-blue-light shadow-sm z-[5]">
         <div className="" />
         <div className="grid grid-cols-[40px_minmax(0,1fr)_70px] items-center gap-2 md:grid-cols-[minmax(0,1fr)_70px] md:gap-x-[4%] lg:gap-x-[10%]">
           <Link href="/">
-            <a className="md:hidden relative aspect-square">
+            <a className="relative md:hidden aspect-square">
               <Image
                 src="/images/logo.svg"
                 alt="app logo"
@@ -43,7 +43,7 @@ const NavBar = () => {
               Search
             </label>
             <input
-              className=" placeholder:text-brand-blue-dark bg-transparent p-2 outline-none"
+              className="p-2 bg-transparent outline-none placeholder:text-brand-blue-dark"
               ref={ref}
               type="search"
               name="search"
@@ -73,7 +73,7 @@ const NavBar = () => {
             target="_blank"
             rel="noopener noreferrer"
             title="Github link"
-            className="flex justify-between items-center space-x-2 text-sm"
+            className="flex items-center justify-between space-x-2 text-sm"
           >
             <span>Github</span>
 

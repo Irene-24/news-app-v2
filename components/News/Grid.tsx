@@ -8,9 +8,9 @@ interface Props {
 
 const Grid = ({ articles = [] }: Props) => {
   return (
-    <section className="grid grid-cols-1 gap-3 my-2 sm:grid-cols-2 2xl:grid-cols-3 ">
+    <section className="grid grid-cols-1 gap-3 my-2 xl:grid-cols-2 max:grid-cols-3 ">
       {articles.map((art, i) => (
-        <ArticleCard key={i} />
+        <ArticleCard {...art} key={i} />
       ))}
     </section>
   );

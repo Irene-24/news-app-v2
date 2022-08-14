@@ -8,7 +8,7 @@ interface PaginationProps {
 
 const getPageKey = (currentPage: number, index: number) => {
   if (index === 0) {
-    return currentPage - 1;
+    return currentPage <= 0 ? 0 : currentPage - 1;
   } else if (index === 1) {
     return currentPage;
   }
@@ -43,8 +43,24 @@ function usePaginatedQuery<
     { ...options, page: currentPage - 1 },
     { skip: currentPage <= 0 }
   );
+
   const currentResult = endpoint.useQuery({ ...options, page: currentPage });
+
   const nextResult = endpoint.useQuery({ ...options, page: currentPage + 1 });
+
+  const refetchOnErr = useCallback(() => {
+    if (lastResult.error) {
+      lastResult.refetch();
+    }
+
+    if (currentResult.error) {
+      currentResult.refetch();
+    }
+
+    if (nextResult.error) {
+      nextResult.refetch();
+    }
+  }, [lastResult, nextResult, currentResult]);
 
   useEffect(() => {
     setLoading(
@@ -63,7 +79,7 @@ function usePaginatedQuery<
     const allResults = [lastResult.data, currentResult.data, nextResult.data];
 
     allResults.forEach((res, index) => {
-      if (res.data.nextPage) {
+      if (res.data.results.length) {
         values.set(getPageKey(currentPage, index), res.data.results);
       }
     });
@@ -89,6 +105,7 @@ function usePaginatedQuery<
     next,
     prev,
     error,
+    refetchOnErr,
 
     // @ts-ignore
     results: [].concat.apply([], [...results.values()]),

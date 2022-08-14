@@ -59,17 +59,12 @@ const SideBar = () => {
 
             <li>
               <a
-                className="block  m-4 
-                bg-brand-blue-medium 
-                text-white rounded
-                text-center p-4
-                relative text-sm
-                "
+                className="relative block p-4 m-4 text-sm text-center text-white rounded bg-brand-blue-medium "
                 href="https://www.figma.com/community/file/1087052805896786982"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span className="w-8 flex items-center justify-center mx-auto object-contain aspect-square">
+                <span className="flex items-center justify-center object-contain w-8 mx-auto aspect-square">
                   <svg
                     className="w-full h-full"
                     viewBox="0 0 90 90"
@@ -128,7 +123,7 @@ const SideBar = () => {
         show={isOpen}
         as={Fragment}
       >
-        <div className="fixed inset-0 bg-black bg-opacity-25 md:hidden">
+        <div className="fixed inset-0 z-10 bg-black bg-opacity-25 md:hidden">
           <span className="hidden">overlay</span>
         </div>
       </Transition>
