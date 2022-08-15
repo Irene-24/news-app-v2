@@ -13,6 +13,8 @@ const Grid = ({ articles = [] }: Props) => {
         <ArticleCard
           className={i === 0 ? "xl:col-span-2 max:col-span-1" : ""}
           {...art}
+          isFirst={i == 0}
+          forcedSize={250}
           key={i}
         />
       ))}
