@@ -2,26 +2,15 @@ import { configureStore, ThunkAction, Middleware } from "@reduxjs/toolkit";
 import { combineReducers, Action } from "redux";
 import { createWrapper } from "next-redux-wrapper";
 
-import { counterSlice } from "./counterSlice";
-
 import { newsApi } from "@/services/newsApi";
 import { jokesApi } from "@/services/jokesApi";
 
-const middlewares: Middleware[] = [newsApi.middleware];
+const middlewares: Middleware[] = [newsApi.middleware, jokesApi.middleware];
 
 const rootReducer = combineReducers({
-  [counterSlice.name]: counterSlice.reducer,
   [newsApi.reducerPath]: newsApi.reducer,
   [jokesApi.reducerPath]: jokesApi.reducer,
 });
-
-// let store = configureStore({
-//   reducer: rootReducer,
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware().concat(middlewares),
-// });
-
-//export { store };
 
 const makeStore = () =>
   configureStore({

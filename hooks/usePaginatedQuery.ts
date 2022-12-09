@@ -110,6 +110,11 @@ function usePaginatedQuery<
     });
   }, [newResult]);
 
+  const resultsArray = useMemo(
+    () => [].concat.apply([], Array.from(results.values())),
+    [results]
+  );
+
   return {
     loading,
     reset,
@@ -118,8 +123,8 @@ function usePaginatedQuery<
     prev,
     error,
     refetchOnErr,
-    results: [].concat.apply([], Array.from(results.values())),
-    isLast: results.size === currentResult?.data?.totalResults,
+    results: resultsArray,
+    isLast: resultsArray.length === currentResult?.data?.totalResults,
   };
 }
 

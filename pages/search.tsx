@@ -1,27 +1,63 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-import { increment } from "redux/counterSlice";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { SEO } from "../components";
 
-const Search: NextPage = () => {
-  const dispatch = useAppDispatch();
-  const { value } = useAppSelector((state) => state.counter);
+import { usePaginatedQuery } from "hooks";
+import { NewsContainer } from "@/components/News";
+import Heading from "@/components/Heading";
+import { newsApi } from "@/services/newsApi";
+
+interface Props {
+  q: string;
+}
+
+const LoadedParams = ({ q = "" }: Props) => {
+  const { results, next, loading, isLast, error, refetchOnErr } =
+    usePaginatedQuery(newsApi.endpoints.search, {
+      query: q,
+    });
 
   return (
-    <p>
+    <div>
+      <Heading>
+        Results for{" "}
+        <i>
+          <q>{q}</q>
+        </i>
+      </Heading>
+
+      <NewsContainer
+        isLast={isLast}
+        articles={results}
+        loadArticles={next}
+        loading={loading}
+        error={error}
+        retryLoadingArticles={refetchOnErr}
+      />
+    </div>
+  );
+};
+
+const Search: NextPage = () => {
+  const router = useRouter();
+  const q = (router?.query?.q as string) || "";
+
+  return (
+    <div>
       <SEO title={`Search`} />
-      Search Page
-      <br />
-      Counter value = {value}
-      <br />
-      <button onClick={() => dispatch(increment())}>Press</button>
-      <br />
-      <Link href="/counter">
-        <a>Counter</a>
-      </Link>
-    </p>
+
+      {q ? (
+        <LoadedParams q={q} />
+      ) : (
+        <Heading>
+          <i>
+            <q>Loading...</q>
+          </i>
+        </Heading>
+      )}
+    </div>
   );
 };
 

@@ -42,7 +42,7 @@ const NewsContainer = ({
           {error ? null : (
             <>
               {!loading ? (
-                <h1 className="px-2 my-2 text-base font-semibold text-center md:text-xl">
+                <h1 className="px-2 my-4 text-base font-semibold text-center md:text-xl">
                   No data
                 </h1>
               ) : null}
