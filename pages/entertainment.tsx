@@ -1,23 +1,23 @@
 import type { NextPage } from "next";
 import { SEO } from "../components";
 import { NewsContainer } from "@/components/News";
-import Heading from "@/components/Heading";
 
 import { usePaginatedQuery } from "hooks";
 import { newsApi } from "@/services/newsApi";
 import { Categories } from "@/utils/constants";
+import Heading from "@/components/Heading";
 
-const Home: NextPage = () => {
+const Entertainment: NextPage = () => {
   const { results, next, loading, isLast, error, refetchOnErr } =
     usePaginatedQuery(newsApi.endpoints.getNews, {
-      category: Categories.headlines,
+      category: Categories.entertainment,
     });
 
   return (
     <div>
-      <SEO />
+      <SEO title="Entertainment" />
 
-      <Heading>Top Stories</Heading>
+      <Heading>Entertainment Segment</Heading>
 
       <NewsContainer
         isLast={isLast}
@@ -31,4 +31,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Entertainment;

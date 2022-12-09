@@ -15,6 +15,7 @@ interface NewsContainerProps {
 }
 
 const isEmpty = (value: any) => {
+  if (!value) return true;
   return Object.keys(value).length === 0;
 };
 

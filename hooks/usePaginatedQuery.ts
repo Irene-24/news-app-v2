@@ -90,8 +90,8 @@ function usePaginatedQuery<
      Consider passing an accessor function for more flexibilty
      */
     allResults.forEach((res, index) => {
-      if (res?.data?.results.length) {
-        values.set(getPageKey(currentPage, index), res.data.results);
+      if (res?.results.length) {
+        values.set(getPageKey(currentPage, index), res.results);
       }
     });
 
@@ -105,6 +105,7 @@ function usePaginatedQuery<
       Array.from(newResult.keys()).forEach((k) =>
         result.set(k, newResult.get(k))
       );
+
       return result;
     });
   }, [newResult]);

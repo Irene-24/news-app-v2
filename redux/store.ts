@@ -4,8 +4,8 @@ import { createWrapper } from "next-redux-wrapper";
 
 import { counterSlice } from "./counterSlice";
 
-import { newsApi } from "./apiSlices/newsApi";
-import { jokesApi } from "./apiSlices/jokesApi";
+import { newsApi } from "@/services/newsApi";
+import { jokesApi } from "@/services/jokesApi";
 
 const middlewares: Middleware[] = [newsApi.middleware];
 

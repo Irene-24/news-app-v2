@@ -37,9 +37,10 @@ export const newsApi = createApi({
         return {
           url: "/news",
           params: {
+            ...defaultConfig,
+
             page: arg.page ?? 0,
             category: arg.category,
-            ...defaultConfig,
           },
         };
       },
@@ -50,9 +51,10 @@ export const newsApi = createApi({
         return {
           url: "/news",
           params: {
+            ...defaultConfig,
+
             page: arg.page ?? 0,
             q: arg.query,
-            ...defaultConfig,
           },
         };
       },

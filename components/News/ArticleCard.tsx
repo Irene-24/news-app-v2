@@ -14,6 +14,8 @@ const limit = {
 };
 
 const trim = (text: string, type: TYPE, forcedSize?: number) => {
+  if (!text) return "";
+
   if (forcedSize) {
     return text.length <= forcedSize ? text : `${text.slice(0, forcedSize)}...`;
   }
