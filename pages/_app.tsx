@@ -5,7 +5,9 @@ import { wrapper } from "../redux/store";
 
 import "../styles/globals.css";
 
-require("../mocks");
+if (process.env.NEXT_PUBLIC_ENABLE_API_MOCKING === "true") {
+  require("../mocks");
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

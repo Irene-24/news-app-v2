@@ -12,9 +12,10 @@ const rootReducer = combineReducers({
   [jokesApi.reducerPath]: jokesApi.reducer,
 });
 
-const makeStore = () =>
+export const makeStore = (preloadedState: any = {}) =>
   configureStore({
     reducer: rootReducer,
+    preloadedState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(middlewares),
   });

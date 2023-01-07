@@ -7,6 +7,14 @@ import news from "@/utils/dummyData/news.json";
 const urlRegex = /newsdata\.io\/api\/1\/news/;
 const TOTAL = 50;
 
+export const errInvalidCategory = {
+  status: "error",
+  results: {
+    message: "Sorry! No such category exists in our database.",
+    code: "UnsupportedFilter",
+  },
+};
+
 const calcNextPage = (page: number) => {
   if (!page || page <= 0) {
     return 1;
