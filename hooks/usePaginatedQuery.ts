@@ -124,7 +124,7 @@ function usePaginatedQuery<
     error,
     refetchOnErr,
     results: resultsArray,
-    isLast: resultsArray.length === currentResult?.data?.totalResults,
+    isLast: resultsArray.length >= currentResult?.data?.totalResults,
   };
 }
 

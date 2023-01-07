@@ -5,6 +5,8 @@ import { wrapper } from "../redux/store";
 
 import "../styles/globals.css";
 
+require("../mocks");
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
